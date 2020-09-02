@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView hexCode = findViewById(R.id.hexTextView);
         final TextView position = findViewById(R.id.positionText);
         position.setText(R.string.coordinatesText);
+//        position.setTextColor(Color.parseColor("#ffffff"));
 
 //        final Handler mHandler = new Handler();
         final View blankView = findViewById(R.id.blankView);
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         // Update the Background color and the TextViews' values
                         cLayout.setBackgroundColor(Color.parseColor(hexColor));
                         position.setText(getString(R.string.touchCoordinates, posX, (int) height-posY));
+//                        position.setTextColor(Color.parseColor(hexColor));
                         hexCode.setText(hexColor);
                         break;
                     case MotionEvent.ACTION_UP:
@@ -103,15 +105,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getHex(double ratioX, double ratioY, int distance) {
-        // Getting the Hex Values
-        String rValue = Double.toHexString((int) (255 * ratioX));
+        // Assign Hex Values as Strings
+        String rValue = Double.toHexString((int) (255 * ratioX));//.replace("-", "");
         String gValue = Double.toHexString((int) (255 * ratioY)).replace("-", "");
         String bValue = Integer.toHexString(distance);
-        // Formatting Hex String
+        // Formatting the Hex String
         if(rValue.length() < 8) rValue = rValue.substring(0, 4) + "0" + rValue.substring(4);
         if(gValue.length() < 8) gValue = gValue.substring(0, 4) + "0" + gValue.substring(4);
         if(bValue.length() < 2) bValue = "0" + bValue;
-        // Pull the desired Hex String
+        // Pulling the desired Hex String
         rValue = rValue.substring(4, 6);
         gValue = gValue.substring(4, 6);
         return "#" + rValue + gValue + bValue;
